@@ -1,7 +1,7 @@
 #pragma once
 
 
-class queued
+class Queued
 {
 	struct Node
 	{
@@ -14,5 +14,6 @@ class queued
 		Node* cestFini = nullptr;
 	}
 
+    
 
 };

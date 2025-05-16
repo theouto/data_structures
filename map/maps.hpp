@@ -1,23 +1,22 @@
 #pragma once
-
+#include <bits/stdc++.h>
 
 class OwnMap
 {
-private:
-
-    Map* map = new Map();
-    Map* start = new Map();
 
 public:
 
     struct Map
     {
-        string identifier;
+        std::string identifier;
         int data;
         Map* next;
     };
+
+    Map* map = new Map();
+    Map* start = new Map();
     
-    static OwnMap()
+    OwnMap()
     {
         map->identifier = "null";
         map->data = 0;
@@ -27,24 +26,28 @@ public:
         start->next = map;
     }
 
-    void addMap(string identifier, int ndata)
+    void addMap(std::string identifier, int ndata)
     {
         Map* mapper = new Map();
         mapper->identifier = identifier;
         mapper->data = ndata;
         //pushes it back
-        mapper->next = *map;
+        mapper->next = map;
         //current beginning
-        *map = mapper;
+        map = mapper;
     }
 
-    int lookUp(Map* map, string ID)
+    int lookUp(std::string ID)
     {
-        while (map->identifier != ID)
+        Map* cycle = new Map();
+        *cycle = *map;
+        while (cycle->identifier != ID)
         {
-            map = map->next;
+            cycle = cycle->next;
         }
-        return map->data;
+        int ret = cycle->data;
+        delete cycle;
+        return ret;
     }
 
 };

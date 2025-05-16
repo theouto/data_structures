@@ -43,5 +43,14 @@ class OwnStack
         int returned = (*node)->data;
         *node = (*node)->next;
         return returned;
-    }      
+    }
+
+    static bool find(Node* node, int want)
+    {
+        bool isthere = false;
+        while (!isthere && node != nullptr)
+            isthere = (want == node->data);
+
+        return isthere;
+    }
 };
