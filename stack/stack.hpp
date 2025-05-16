@@ -5,10 +5,9 @@
 //      make own maps
 //      this is all just for learning, it'll go on github later
 //      good practice
-namespace std
+
+class OwnStack
 {
-    class OwnStack
-    {
     public:
 
     struct Node
@@ -41,8 +40,8 @@ namespace std
     
     static int pop(Node** node)
     {
-        int returned = &(*node)->data;
-        node = &(*node)->next;
+        int returned = (*node)->data;
+        *node = (*node)->next;
         return returned;
     }      
-    };
+};

@@ -1,25 +1,15 @@
 #include <bits/stdc++.h>
 #include "stack.hpp"
-using namespace std;
 
 int main()
 {
-
-    OwnCircle::Node* started = new OwnCircle::Node();
-    OwnCircle::Node* forever = new OwnCircle::Node();
-    started->next = forever;
-    started->data = 0;
-    forever->next = started;
-    forever->data = 0;
+    OwnStack::Node* nod = nullptr;
 
     for (int i = 0; i < 10; i++)
     {
-        OwnCircle::addCircle(&started, &forever, i);
+        OwnStack::addStack(&nod, i);   
     }
 
-    while (started != nullptr)
-    {
-        cout << started->data << '\n';
-        started = started->next;
-    }
+    while (nod != nullptr)
+        std::cout << OwnStack::pop(&nod) << '\n';
 }

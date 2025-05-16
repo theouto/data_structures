@@ -1,20 +1,18 @@
 #pragma once
 
-namespace std
+
+class queued
 {
-	class queued
+	struct Node
 	{
-		struct Node
-		{
-			int data = 0;
-			Node* next;
-		};
-
-		static queued()
-		{
-			Node* cestFini = nullptr;
-		}
-
-
+		int data = 0;
+		Node* next;
 	};
-}
+
+	static queued()
+	{
+		Node* cestFini = nullptr;
+	}
+
+
+};
