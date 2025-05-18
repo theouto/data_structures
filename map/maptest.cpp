@@ -3,42 +3,46 @@ using namespace std;
 
 int main()
 {
-    
-    OwnMap* mappi = new OwnMap();
-
-    cout << "check 1" << '\n';
-
-    mappi->addMap("test", 3);
-    mappi->addMap("man", 7);
-    mappi->addMap("august", 11);
-    mappi->addMap("whytest", 2);
-
-    cout << "check 2" << '\n';
 
     auto start = chrono::system_clock::now();
     
-        mappi->lookUp("test");
-        mappi->lookUp("whytest");
-        mappi->lookUp("august");
+    OwnMap::Mapii* mappi = nullptr;
+    //Map* start = new Map();
+    
+    //mappi->identifier = "null";
+    //mappi->data = 0;
+    //mappi->next = start;
+
+    //start->identifier = "null";
+    //start->data = 0;
+    //start->next = map;
+
+    //cout << "check 1" << '\n';
+
+    for (int i = 0; i < 1000; i++)
+        OwnMap::addMap(&mappi,i, i);
+
+    //cout << "check 2" << '\n';
+
+    for (int i = 0; i < 1000; i++)
+        OwnMap::lookUp(mappi, i);
         
     auto end = chrono::system_clock::now();
     chrono::duration<float, milli> duration = end - start;
-    cout << duration.count() << ".ms" << '\n';
+    cout << "my map: " << duration.count() << ".ms" << '\n';
 
-    unordered_map<string, int> mapped;
-    mapped["test"] = 3;
-    mapped["man"] = 7;
-    mapped["august"] = 11;
-    mapped["whytest"] = 2;
-
-    start = chrono::system_clock::now();
     
-        mapped["test"];
-        mapped["whytest"];
-        mapped["august"];
-        mapped["man"];
+    start = chrono::system_clock::now();
+
+    unordered_map<int, int> mapped;
+
+    for(int i = 0; i < 1000; i++)
+        mapped[i] = i;
+
+    for (int i = 0; i < 1000; i++)
+        mapped[i];
     
     end = chrono::system_clock::now();
     duration = end - start;
-    cout << duration.count() << ".ms" << '\n';
+    cout << "std unordered_map: " <<duration.count() << ".ms" << '\n';
 }

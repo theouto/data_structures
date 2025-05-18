@@ -11,43 +11,85 @@ public:
         std::string identifier;
         int data;
         Map* next;
+        Map(int value)
+        {
+            data = value;
+            next = nullptr;
+        }
     };
 
-    Map* map = new Map();
-    Map* start = new Map();
-    
-    OwnMap()
+    struct Mapii
     {
-        map->identifier = "null";
-        map->data = 0;
-        map->next = start;
-        start->identifier = "null";
-        start->data = 0;
-        start->next = map;
-    }
+        int identifier;
+        int data;
+        Mapii* next;
+    };
 
-    void addMap(std::string identifier, int ndata)
+    //adapt it to be add to queue and not add first
+    //it will make it easier to 
+    static void addMapFirst(Map** map, std::string identifier, int ndata)
     {
         Map* mapper = new Map();
         mapper->identifier = identifier;
         mapper->data = ndata;
         //pushes it back
-        mapper->next = map;
+        mapper->next = *map;
         //current beginning
-        map = mapper;
+        *map = mapper;
     }
 
-    int lookUp(std::string ID)
+    static void addMapFirst(Mapii** map, int identifier, int ndata)
     {
-        Map* cycle = new Map();
-        *cycle = *map;
-        while (cycle->identifier != ID)
-        {
+        Mapii* mapper = new Mapii();
+        mapper->identifier = identifier;
+        mapper->data = ndata;
+        //pushes it back
+        mapper->next = *map;
+        //current beginning
+        *map = mapper;
+    }
+
+    static void addMapLast(Map** map, std::string identifier, int ndata)
+    {
+        Map* mapper = new Map();
+        mapper->identifier = identifier;
+        mapper->data = ndata;
+        //pushes it back
+        (*map)->next = mapper;
+        //current end
+        *map = mapper;
+    }
+
+    static void addMapLast(Mapii**, int identifier, int ndata)
+    {
+        
+    }
+
+    static int lookUp(Map* map, std::string ID)
+    {
+        while (map->identifier != ID)
+            map = map->next;
+
+        return map->data;
+    }
+
+    static int lookUp(Mapii* map, int ID)
+    {
+        while (map->identifier != ID)
+            map = map->next;
+
+        return map->data;
+    }
+
+    static void pop(Mapii** map, int ID)
+    {
+        Mapii* cycle = *map;
+         while (cycle->identifier != ID)
             cycle = cycle->next;
-        }
-        int ret = cycle->data;
-        delete cycle;
-        return ret;
+
+        Mapii prev = cycle;
+        cycle = cycle->next;
+        prev->next = cycle;
     }
 
 };
