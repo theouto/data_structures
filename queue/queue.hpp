@@ -3,55 +3,58 @@
 
 class Queued
 {
+    private:
 
-    public:
-    
-	 struct Node
+    struct Node
     {
-        Node* next;
-        int data;
+      Node* next;
+      int data;
     };
 
-    //this behaves like a queue, I just need to add pop and the like
-    //queue initialised via the node structs*
-    static Node* add(Node* head, int ndata)
+    Node* first;
+    Node* last;
+    int size;
+
+    public:
+
+    Queued()
     {
-        Node* node = new Node();
-        node->data = ndata;
-        //pushes it back
-        node->next = nullptr;
-        //current beginning
+        first = nullptr;
+        last = nullptr;
+        size = 0;
+    };
 
-        Node* returned = head;
-        while (returned->next != nullptr)
-            returned = returned->next;
-        returned->next = node;
+    bool isEmpty() {return first == nullptr;}
 
-        return head;
+    //this behaves like a queue
+    void add(int ndata)
+    {
+        Node* nlast = new Node();
+        nlast->data = ndata;
+        if (isEmpty()) {first = last = nlast; size++; return;}
+        last->next = nlast;
+        last = nlast;
+        size++;
     }
 
-    static int size(Node* node)
-    {
-        int size = 0;
-        while (node!= nullptr)
-        {
-            size++;
-        }
-        return size;
-    }
+    int sized(){return size;}
+    int front(){return first->data;}
     
-    static int pop(Node** node)
+    void pop()
     {
-        int returned = (*node)->data;
-        *node = (*node)->next;
-        return returned;
+        if (isEmpty()) {return; }
+        first = first->next;
+        size--;
+        return;
     }
 
-    static bool find(Node* node, int want)
+    bool find(int want)
     {
+        Node* checker = first;
         bool isthere = false;
-        while (!isthere && node != nullptr)
-            isthere = (want == node->data);
+        while (!isthere && checker != nullptr)
+            isthere = (want == checker->data);
+            checker = checker->next;
 
         return isthere;
     }
