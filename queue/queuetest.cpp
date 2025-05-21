@@ -5,15 +5,36 @@ using namespace std;
 
 int main()
 {
-    Queued* queue = new Queued();
     
-    for (int i = 0; i < 10; i++)
-        queue->add(i);
+    Queued* queued = new Queued();
+    
+    for (int i = 0; i < 10000000; i++)
+        queued->add(i);
 
-    cout << "check 1" << '\n';
-    while(!(queue->isEmpty()))
+    auto start = chrono::system_clock::now();
+    while(!(queued->isEmpty()))
     {
-        cout << queue->front() << " " << queue->sized()-1 << '\n';
-        queue->pop();
+        queued->front();
+        queued->sized()-1;
+        queued->pop();
     }
+    auto end = chrono::system_clock::now();
+    chrono::duration<float, milli> duration = end - start;
+    cout << "my queue: " << duration.count() << ".ms" << '\n';
+
+    queue<int> queueue;
+    for (int i = 0; i < 10000000; i++)
+        queueue.push(i);
+
+    start = chrono::system_clock::now();
+    while(!queueue.empty())
+    {
+        queueue.front();
+        queueue.size();
+        queueue.pop();
+    }
+    end = chrono::system_clock::now();
+    duration = end - start;
+    cout << "std queue: " << duration.count() << ".ms" << '\n';
+
 }

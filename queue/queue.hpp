@@ -26,7 +26,6 @@ class Queued
 
     bool isEmpty() {return first == nullptr;}
 
-    //this behaves like a queue
     void add(int ndata)
     {
         Node* nlast = new Node();
