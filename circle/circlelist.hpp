@@ -3,7 +3,7 @@
 class OwnCircle
 {
 
-public:
+private:
 
     struct Node
     {
@@ -11,16 +11,45 @@ public:
         int data;
     };
 
-    static void addCircle(Node** nextNode, Node** firstNode, int ndata)
+    Node* head = new Node();
+    Node* lastt = new Node();
+    int size = 0;
+
+public:
+
+    OwnCircle(int first, int last)
+    {
+        head->data = first;
+        head->next = lastt;
+        lastt->data = last;
+        lastt->next = head;
+        size += 2;
+    }
+
+    void addCircle(int ndata)
     {
         Node* node = new Node();
         node->data = ndata;
-        //loops
-        *firstNode->next = node;
         //pushes it back
-        node->next = *nextNode;
+        node->next = head;
+        lastt->next = node;
         //current beginning
-        *nextNode = node;
+        head = node;
+        size++;
     }
 
+    int front() {return head->data;}
+    int sized() {return size;}
+
+    void pop()
+    {
+        lastt->next = head->next;
+        head = head->next;
+        size--;
+    }
+
+    void next()
+    {
+        head = head->next;
+    }
 };

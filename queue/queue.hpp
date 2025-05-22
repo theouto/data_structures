@@ -24,6 +24,8 @@ class Queued
         size = 0;
     };
 
+    ~Queued(){}
+
     bool isEmpty() {return first == nullptr;}
 
     void add(int ndata)
