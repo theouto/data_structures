@@ -5,14 +5,15 @@ using namespace std;
 
 int main()
 {
+    
+    auto start = chrono::system_clock::now();
+    
     OwnStack::Node* nod = nullptr;
 
-    for (int i = 0; i < 10000000; i++)
+    for (int i = 0; i < 1000000; i++)
     {
         OwnStack::addStack(&nod, i);   
     }
-
-    auto start = chrono::system_clock::now();
 
     while (nod != nullptr)
         OwnStack::pop(&nod);
@@ -20,13 +21,14 @@ int main()
     auto end = chrono::system_clock::now();
     chrono::duration<float, milli> duration = end - start;
     cout << "my stack: " << duration.count() << ".ms" << '\n';
+
+    start = chrono::system_clock::now();
     
     std::stack<int> stacked;
 
-    for (int i = 0; i < 10000000; i++)
+    for (int i = 0; i < 1000000; i++)
         stacked.push(i);
     
-    start = chrono::system_clock::now();
     while(!stacked.empty())
     {
         stacked.top();
