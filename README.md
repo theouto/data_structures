@@ -1,2 +1,2 @@
 # data_structures
-Data structure demos made by MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE. Done for practice
+Simple classes for data structures, not great, pretty standard. Done by me as a simple exercise
