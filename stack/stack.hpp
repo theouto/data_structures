@@ -1,9 +1,6 @@
 #pragma once
 
-//Todo: make own linkedlist class
-//      make own stacks and queues
-//      make own maps
-//      this is all just for learning, it'll go on github later
+//Note: this is all just for learning, it'll go on github later
 //      good practice
 
 class OwnStack
@@ -27,7 +24,7 @@ class OwnStack
         //current beginning
         *nextNode = node;
     }
-
+    
     static int size(Node* node)
     {
         int size = 0;
